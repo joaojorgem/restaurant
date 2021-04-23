@@ -43,8 +43,8 @@ router.post('/create', async (request, response) => {
     const reservation = await Reservation.create({
         date,
         hour,
-        adults,
-        childrens,
+        adults: Number(adults),
+        childrens: Number(childrens),
         specialNotes,
         user: newUser._id
     });
