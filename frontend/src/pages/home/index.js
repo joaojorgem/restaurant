@@ -18,7 +18,7 @@ export default function Home() {
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [phone, setPhone] = React.useState('');
-
+    const [user, setUser]= React.useState('');
     const [step, setStep] = React.useState(0);
 
     const history = useHistory();
@@ -62,6 +62,7 @@ export default function Home() {
                 setLastName(user.lastName);
                 setEmail(user.email);
                 setPhone(user.phone);
+                setUser(user);
             }
         }
 
@@ -69,6 +70,11 @@ export default function Home() {
     }, []);
 
     function singIn() {
+
+        if (user) {
+            return history.push('/reservation')
+        }
+        
         Swal.fire({
             title: 'Sign in',
             text: 'Enter your e-mail.',
@@ -101,7 +107,7 @@ export default function Home() {
                 <h1>Enjoy a unique dinner</h1>
             </div>
             <div className="form-wizard">
-                <button className="btn btn-danger float-right" onClick={singIn}>Sign in</button>
+                <button className="btn btn-danger float-right" onClick={singIn}>{user ? 'My Reservations' : 'Sign in'}</button>
                 <div className="logo" >
                     <img src={Logo} />
                 </div>
