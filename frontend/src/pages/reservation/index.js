@@ -20,7 +20,7 @@ export default function Reservation() {
 
     const refreshData = () => setRefresh(state => !state);
 
-    React.ufseEffect(() => {
+    React.useEffect(() => {
         // Function get user
         function getUser() {
             const tokenUser = JSON.parse(localStorage.getItem('user'));
