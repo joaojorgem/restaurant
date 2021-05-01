@@ -138,11 +138,15 @@ export default function Reservation() {
             </div>
 
             <div className="row">
-                <div className="col-10">
+                <div className="col-8">
                     <h1 className="fw-bold">My Reservations: {user.firstName} {user.lastName}</h1>
                 </div>
-                <div className="col-2">
+                <div className="col-4">
                     <button className="btn btn-success" onClick={() => history.push("/")}>New reservation</button>
+                    <button className="btn btn-link ml-5" onClick={() => {
+                        localStorage.removeItem("user");
+                        history.replace("/");
+                    }}>Logout</button>
                 </div>
             </div>
 
