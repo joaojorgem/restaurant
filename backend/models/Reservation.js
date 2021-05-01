@@ -2,11 +2,11 @@ const mongoose = require('../db');
 
 const ReservationSchema = new mongoose.Schema({
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   hour: {
-    type: Date,
+    type: String,
     required: true,
   },
   adults: {

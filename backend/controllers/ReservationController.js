@@ -12,12 +12,37 @@ router.get('/', async (_request, response) => {
     }
 })
 
+router.get('/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
+        const reservation = await Reservation.where({ user: id }).populate('user');
+        return response.json(reservation);
+
+    } catch (error) {
+        return response.status(500).json({ error: 'An error has occurred!.' });
+    }
+})
+
+router.post('/sessions', async (request, response) => {
+    try {
+        const { email } = request.body;
+        const user = await User.findOne({ email });
+        if (user) {
+            return response.json(user);
+        }
+        return response.status(404).json({ error: 'Not found email registered.' });
+
+    } catch (error) {
+        return response.status(500).json({ error: 'An error has occurred!.' });
+    }
+})
+
 router.get('/show', async (request, response) => {
     try {
         const { id } = request.params;
         const reservation = await Reservation.findById(id).populate('user');
         if (!reservation._id) {
-            return response.status(404).json({ error: 'Is empty.' });
+            return response.status(404).json({ error: 'Is a empty.' });
         }
 
         return response.json(reservation);
@@ -27,17 +52,17 @@ router.get('/show', async (request, response) => {
     }
 })
 
-router.post('/create', async (request, response) => {
 
-    let newUser = request.body.user;
-    const userExists = await User.where('email', user.email);
+router.post('/create', async (request, response) => {
+    let newUser;
+    const user = request.body.user;
+    const userExists = await User.findOne({ email: user.email});
 
     if (!userExists) {
-        newUser = await User.Create(user);
+        newUser = await User.create(user);
     } else {
         newUser = userExists;
     }
-
     const { date, hour, adults, childrens, specialNotes } = request.body;
 
     const reservation = await Reservation.create({
@@ -48,7 +73,7 @@ router.post('/create', async (request, response) => {
         specialNotes,
         user: newUser._id
     });
-
+    
     return response.json({ id: reservation._id, user: newUser });
 });
 
@@ -59,7 +84,7 @@ router.put('/:id', async (request, response) => {
         return response.status(401).json({ error: 'An error has occurred!.' });
     }
 
-    const reservationUpdated = await reservation.findByIdAndUpdate(id, response.body);
+    const reservationUpdated = await Reservation.findByIdAndUpdate(id, request.body);
 
     return response.json(reservationUpdated);
 });
@@ -74,7 +99,7 @@ router.delete('/:id', async (request, response) => {
         return response.status(401).json({ error: 'An error has occurred!.' });
     }
 
-    await reservation.findByIdAndDelete(id);
+    await Reservation.findByIdAndDelete(id);
 
     return response.status(204).send('ok');
 });

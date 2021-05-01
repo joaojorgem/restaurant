@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-const uri = `mongodb+srv://${process.env.MONGODB_ACCOUNT}/${process.env.MONGODB_DB}`
-
-mongoose.connect(`${uri}?retryWrites=true&w=majority`, 
+mongoose.connect(process.env.MONGODB_URL, 
 { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 .then(() => {
   console.log('Database Mongo Connected');
-}).catch(() => {
+}).catch((err) => {
+    console.log(err)
   console.log('Database Mongo Error');
 });
 
