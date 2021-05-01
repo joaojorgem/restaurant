@@ -23,10 +23,12 @@ export default function Home() {
 
     const history = useHistory();
 
+    // Function for save user data in local storage
     function storageUser(data) {
         localStorage.setItem('user', JSON.stringify(data));
     }
 
+    // function submit in two steps.
     function submitForm(e) {
         e.preventDefault();
         if (step === 0) {
@@ -54,6 +56,8 @@ export default function Home() {
     }
 
     React.useEffect(() => {
+
+        // Verify user in local storage
         function getUser() {
             const item = localStorage.getItem('user');
             if (item) {
@@ -74,7 +78,7 @@ export default function Home() {
         if (user) {
             return history.push('/reservation')
         }
-        
+
         Swal.fire({
             title: 'Sign in',
             text: 'Enter your e-mail.',

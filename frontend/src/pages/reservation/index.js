@@ -9,15 +9,6 @@ import ReservationForm from '../../components/ReservationForm';
 
 import Logo from '../../assets/logo.png';
 
-const styles = {
-    container: {
-        display: 'flex',
-        justifyContent: "center",
-        alignContent: "center",
-        flex: 1
-    }
-}
-
 
 export default function Reservation() {
     const history = useHistory();
@@ -26,14 +17,15 @@ export default function Reservation() {
 
     const [reservations, setReservations] = React.useState([]);
     const [refresh, setRefresh] = React.useState(0);
-    
+
     const refreshData = () => setRefresh(state => !state);
 
-    React.useEffect(() => {
+    React.ufseEffect(() => {
+        // Function get user
         function getUser() {
             const tokenUser = JSON.parse(localStorage.getItem('user'));
             if (!tokenUser) {
-               return history.replace("/");
+                return history.replace("/");
             }
             setUser(tokenUser);
             setId(localStorage.getItem('id'));
@@ -52,11 +44,11 @@ export default function Reservation() {
 
 
     function edit(reservation) {
-
+        // Function edit reservation with component form.
         const reactSwal = withReactContent(Swal);
         reactSwal.fire({
             title: 'Edit reservation',
-            html: <ReservationForm reservation={reservation} refreshData={refreshData}/>,
+            html: <ReservationForm reservation={reservation} refreshData={refreshData} />,
             showCloseButton: false,
             showCancelButton: false,
             showConfirmButton: false,
@@ -79,6 +71,7 @@ export default function Reservation() {
     }
 
     function show(reservation) {
+        // Function for displaying data
         const reactSwal = withReactContent(Swal);
         reactSwal.fire({
             title: 'Show reservation',
@@ -105,41 +98,43 @@ export default function Reservation() {
 
     function destroy(reservation) {
 
+        // Function for destroy reservation
+        // check if you are sure 
         Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-        if (result.isConfirmed) {
-            
-            http.delete(`reservation/${reservation._id}`, {
-                headers: { 'Authorization' : reservation.user._id }
-            }).then(response => {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                );
-                setReservations(state => state.filter(x => x._id != reservation._id))
-                refreshData();
-            })
-            
-        }
+            if (result.isConfirmed) {
+
+                http.delete(`reservation/${reservation._id}`, {
+                    headers: { 'Authorization': reservation.user._id }
+                }).then(response => {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    );
+                    setReservations(state => state.filter(x => x._id != reservation._id))
+                    refreshData();
+                })
+
+            }
         })
-        
+
     }
 
     return (
         <div className="container pt-5">
 
             <div className="logo text-center m-5" >
-            
-                <img onClick={() => history.push("/")} src={Logo}/>
-       
+
+                <img onClick={() => history.push("/")} src={Logo} />
+
             </div>
 
             <div className="row">
@@ -150,10 +145,13 @@ export default function Reservation() {
                     <button className="btn btn-success" onClick={() => history.push("/")}>New reservation</button>
                 </div>
             </div>
-            
+
             <br />
 
             <div className="table-responsive">
+
+                {/* Table CRUD */}
+
                 <table className="table table-bordered" style={{ width: '100%' }}>
                     <thead>
                         <tr>
@@ -168,6 +166,9 @@ export default function Reservation() {
                         </tr>
                     </thead>
                     <tbody>
+
+                        {/* check that it is not empty */}
+                        
                         {reservations.length ? reservations.map((data, index) => (
                             <tr key={index}>
                                 <td>{data._id}</td>

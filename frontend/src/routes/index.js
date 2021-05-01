@@ -5,7 +5,7 @@ import NotFound from '../pages/notFound';
 import Reservation from '../pages/reservation';
 
 export default function Routes() {
-
+    // component for all routes 
     return (
         <BrowserRouter>
             <Switch>

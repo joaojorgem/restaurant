@@ -2,6 +2,7 @@ import React from 'react';
 import http from '../../config/axios';
 import Swal from 'sweetalert2';
 
+// Component form using another pages
 export default function ReservationForm({ reservation, refreshData}) {
 
     const [date, setDate] = React.useState(reservation.date);
