@@ -1,5 +1,6 @@
 const mongoose = require('../db');
 
+// defines the user entity with all attributes
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -25,6 +26,8 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
+
+// creates the model to manipulate the data
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

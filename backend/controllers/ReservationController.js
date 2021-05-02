@@ -3,6 +3,7 @@ const User = require('../models/User');
 const express = require('express');
 const router = express.Router();
 
+// create CRUD routes using the express router
 router.get('/', async (_request, response) => {
     try {
         const reservations = await Reservation.where().populate('user')
@@ -23,6 +24,7 @@ router.get('/:id', async (request, response) => {
     }
 })
 
+// this route checks if the email exists and returns the user
 router.post('/sessions', async (request, response) => {
     try {
         const { email } = request.body;
@@ -57,7 +59,8 @@ router.post('/create', async (request, response) => {
     let newUser;
     const user = request.body.user;
     const userExists = await User.findOne({ email: user.email});
-
+    /* to create a new reservation, check if the user already exists in the database,
+    otherwise he creates a new user */
     if (!userExists) {
         newUser = await User.create(user);
     } else {
@@ -105,5 +108,5 @@ router.delete('/:id', async (request, response) => {
 });
 
 
-
+// export all routes to the main file
 module.exports = app => app.use('/reservation', router);

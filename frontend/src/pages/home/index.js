@@ -10,15 +10,15 @@ export default function Home() {
 
     const [date, setDate] = React.useState('')
     const [hour, setHour] = React.useState('')
-    const [adults, setAdults] = React.useState(0)
-    const [childrens, setChildrens] = React.useState(0)
+    const [adults, setAdults] = React.useState('')
+    const [childrens, setChildrens] = React.useState('')
     const [specialNotes, setSpecialNotes] = React.useState('');
 
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [phone, setPhone] = React.useState('');
-    const [user, setUser]= React.useState('');
+    const [user, setUser] = React.useState('');
     const [step, setStep] = React.useState(0);
 
     const history = useHistory();
@@ -119,85 +119,123 @@ export default function Home() {
                 {step === 0 ? (
                     <form className="form" onSubmit={submitForm}>
                         <h1 className="fw-bold">Table Reservation Details</h1>
-                        <input
-                            className="form-control"
-                            name="date"
-                            type="date"
-                            placeholder="Prefrerred Date"
-                            value={date}
-                            onChange={e => setDate(e.currentTarget.value)}
-                            required />
-                        <input
-                            className="form-control"
-                            name="hour"
-                            type="time"
-                            placeholder="Prefrerred Hour"
-                            value={hour}
-                            onChange={e => setHour(e.currentTarget.value)}
-                            required />
-                        <input
-                            className="form-control"
-                            name="adults"
-                            type="number"
-                            placeholder="Adults"
-                            value={adults}
-                            onChange={e => setAdults(e.currentTarget.value)}
-                            required />
-                        <input
-                            className="form-control"
-                            name="childrens"
-                            type="number"
-                            placeholder="Childrens"
-                            value={childrens}
-                            onChange={e => setChildrens(e.currentTarget.value)} />
-                        <textarea
-                            className="form-control"
-                            name="specialNotes"
-                            rows="4"
-                            placeholder="Special notes or alergies"
-                            value={specialNotes}
-                            onChange={e => setSpecialNotes(e.currentTarget.value)}></textarea>
+                        <div>
+                            <label>Preferred Date</label>
+                            <input
+                                className="form-control"
+                                name="date"
+                                type="date"
+                                placeholder="Preferred Date"
+                                value={date}
+                                onChange={e => setDate(e.currentTarget.value)}
+                                required />
+                        </div>
+                        <div>
+                            <label>Preferred Hour</label>
+                            <input
+                                className="form-control"
+                                name="hour"
+                                type="time"
+                                placeholder="Preferred Hour"
+                                value={hour}
+                                onChange={e => setHour(e.currentTarget.value)}
+                                required />
+                        </div>
+                        <div>
+                            <label>Adults</label>
+                            <input
+                                className="form-control"
+                                name="adults"
+                                type="number"
+                                placeholder="Adults"
+                                value={adults}
+                                onChange={e => setAdults(e.currentTarget.value)}
+                                required
+                                min={0}
+                                max={10}
+                                minLength={0}
+                                maxLength={10}
+                            />
+                            
+                        </div>
+                        <div>
+                            <label>Childrens</label>
+                            <input
+                                className="form-control"
+                                name="childrens"
+                                type="number"
+                                placeholder="Childrens"
+                                value={childrens}
+                                min={0}
+                                max={10}
+                                minLength={0}
+                                maxLength={10}
+                                onChange={e => setChildrens(e.currentTarget.value)} />
+                        </div>
+                        <div>
+                            <label>Special Notes</label>
+                            <textarea
+                                className="form-control"
+                                name="specialNotes"
+                                rows="4"
+                                placeholder="Special notes or alergies"
+                                value={specialNotes}
+                                onChange={e => setSpecialNotes(e.currentTarget.value)}></textarea>
+                        </div>
                         <button className="btn btn-success float-right">Next</button>
                     </form>
                 ) : (
                         <form className="form" onSubmit={submitForm}>
                             <h1 className="fw-bold">Please fill with your details</h1>
-                            <input
-                                className="form-control"
-                                name="firstName"
-                                type="text"
-                                placeholder="First Name"
-                                value={firstName}
-                                onChange={e => setFirstName(e.currentTarget.value)}
-                                required />
-                            <input
-                                className="form-control"
-                                name="lastName"
-                                type="text"
-                                placeholder="Last Name"
-                                value={lastName}
-                                onChange={e => setLastName(e.currentTarget.value)}
-                                required />
-                            <input
-                                className="form-control"
-                                name="email"
-                                type="email"
-                                placeholder="E-mail"
-                                value={email}
-                                onChange={e => setEmail(e.currentTarget.value)}
-                                required />
-                            <input
-                                className="form-control"
-                                name="phone"
-                                type="phone"
-                                placeholder="Phone"
-                                value={phone}
-                                onChange={e => setPhone(e.currentTarget.value)}
-                                required />
+
+                            <div>
+                                <label>First Name</label>
+                                <input
+                                    className="form-control"
+                                    name="firstName"
+                                    type="text"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={e => setFirstName(e.currentTarget.value)}
+                                    required />
+                            </div>
+                            <div>
+                                <label>Last Name</label>
+                                <input
+                                    className="form-control"
+                                    name="lastName"
+                                    type="text"
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChange={e => setLastName(e.currentTarget.value)}
+                                    required />
+                            </div>
+                            <div>
+                                <label>E-mail</label>
+                                <input
+                                    className="form-control"
+                                    name="email"
+                                    type="email"
+                                    placeholder="E-mail"
+                                    value={email}
+                                    onChange={e => setEmail(e.currentTarget.value)}
+                                    required />
+                            </div>
+                            <div>
+                                <label>Phone</label>
+                                <input
+                                    className="form-control"
+                                    name="phone"
+                                    type="phone"
+                                    placeholder="Phone"
+                                    value={phone}
+                                    onChange={e => setPhone(e.currentTarget.value)}
+                                    required />
+                            </div>
 
                             <div className="btn-group">
                                 <button role="button" onClick={() => setStep(0)} className="btn btn-secondary float-right">Prev</button>
-                                <button className="btn btn-success float-right">Reservation</button>
+                                <button className="btn btn-success float-right">Reserve</button>
                             </div>
                         </form>
                     )}

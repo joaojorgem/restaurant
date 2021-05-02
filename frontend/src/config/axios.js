@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //Create instance axios
 const http = axios.create({
-    baseURL: 'https://restaurant-joao-backend.herokuapp.com/',
+    baseURL: 'https://3333-olive-quail-cng1tzlo.ws-us04.gitpod.io/',
     timeout: 15000,
     headers: {
         'Content-Type': 'application/json',

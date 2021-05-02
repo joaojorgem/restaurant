@@ -1,5 +1,6 @@
 const mongoose = require('../db');
 
+// defines the reservation entity with all attributes
 const ReservationSchema = new mongoose.Schema({
   date: {
     type: String,
@@ -21,7 +22,7 @@ const ReservationSchema = new mongoose.Schema({
     type: String,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, // type mongo object id
     ref: 'User',
     required: true,
   },
@@ -31,7 +32,7 @@ const ReservationSchema = new mongoose.Schema({
   }
 });
 
-
+// creates the model to manipulate the data
 const Reservation = mongoose.model('Reservation', ReservationSchema);
 
 module.exports = Reservation;

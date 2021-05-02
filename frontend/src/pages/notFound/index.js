@@ -5,10 +5,12 @@ const styles = {
     container: {
         display: 'flex',
         justifyContent: "center",
-        alignContent: "center",
-        flex: 1
+        alignItems: "center",
+        flex: 1,
+        height: "100vh"
     }
 }
+
 export default function NotFound() {
     return (
         <div style={styles.container}>

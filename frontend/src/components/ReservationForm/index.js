@@ -14,6 +14,8 @@ export default function ReservationForm({ reservation, refreshData}) {
     function submitForm(e) {
         e.preventDefault();
         const data = { date, hour, adults, childrens, specialNotes };
+
+        // updates the reservation in the system
         http.put(`reservation/${reservation._id}`, data).then(response => {
             Swal.fire({
                 title: 'Reservation update success!', 
