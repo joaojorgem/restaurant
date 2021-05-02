@@ -159,12 +159,12 @@ export default function Home() {
                             
                         </div>
                         <div>
-                            <label>Childrens</label>
+                            <label>Children</label>
                             <input
                                 className="form-control"
                                 name="childrens"
                                 type="number"
-                                placeholder="Childrens"
+                                placeholder="Children"
                                 value={childrens}
                                 min={0}
                                 max={10}
@@ -178,7 +178,7 @@ export default function Home() {
                                 className="form-control"
                                 name="specialNotes"
                                 rows="4"
-                                placeholder="Special notes or alergies"
+                                placeholder="Special notes or allergies"
                                 value={specialNotes}
                                 onChange={e => setSpecialNotes(e.currentTarget.value)}></textarea>
                         </div>
